@@ -1,0 +1,65 @@
+<div class="container-fluid ">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-2">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Solr</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Demo</a>
+              </li>
+            </ul>
+            <form class="d-flex" [formGroup]="form" (ngSubmit)="submit()">
+              <input formControlName="keyword" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+  <div class="row">
+    <div class="col-8">
+        <h4>found: {{numfound|number}}</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Publisher</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of book; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ item.title }}</td>
+            <td>{{ item.author }}</td>
+            <td>{{ item.publisher }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">
+          <h2>Filter</h2>
+        </div>
+        <div class="card-body">
+          <h4>Author</h4>
+          <ol class="list-group list-group-numbered">
+            <li *ngFor="let item of facetAuthor|slice:0:10"
+              class="list-group-item d-flex justify-content-between align-items-start"
+            >
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">{{item.data}}</div>
+              </div>
+              <span class="badge bg-primary rounded-pill">{{item.count}}</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <h2></h2>
+    </div>
+  </div>
+</div>
