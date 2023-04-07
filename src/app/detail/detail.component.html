@@ -1,0 +1,24 @@
+
+
+<div class="pt-2 mx-5">
+  <nav aria-label="breadcrumb">
+    <div class="breadcrumb" [ngClass]="'custom-breadcrumb'">
+      <a class="breadcrumb-item" [routerLink]="['/index']"><span>Home</span></a>
+      <p class="breadcrumb-item active" aria-current="page">{{title}}</p>
+    </div>
+  </nav>
+</div>
+
+<div class="container pd-1">
+  <h1>{{title}}</h1>
+</div>
+
+<style>
+  .custom-breadcrumb {
+    background-color: #d3d1d1;
+    padding: 1rem 5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem; 
+  }
+
+</style>
