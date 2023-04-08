@@ -24,6 +24,7 @@ export class IndexComponent {
 
   numfound: any;
   book: any[] = [];
+  Aired: any[] = [];
   
 
   facetAuthor: facetDisplay[] = [];
@@ -35,31 +36,69 @@ export class IndexComponent {
   form: FormGroup = new FormGroup({
     keyword: new FormControl('', Validators.required),
     genre: new FormControl(''),
-    year : new FormControl(''),
+    aired : new FormControl(''),
   });
 
   
 
   ngOnInit() {
     this.search('*');
+    this.getDataFacetAired();
   }
+
+  getDataFacetAired() {
+    this.Aired = [];
+    this.getFacetAired().subscribe((response: RootResponse) => {
+      this.Aired = response.facet_counts.facet_fields.aired;
+      // ไม่เอาค่า count 
+      for (let i = 0; i < this.Aired.length; i++) {
+        if (typeof(this.Aired[i]) == 'number') {
+          this.Aired.splice(i, 1);
+        }
+      }
+      console.log(this.Aired.sort());
+    });
+
+  }
+
 
  
   submit() {
 
+  
     if (this.form.controls['genre'].value != '' && this.form.controls['keyword'].value != '') {
       this.searchByGenreAndKeyword(this.form.controls['genre'].value, this.form.controls['keyword'].value);
     }
+    else if (this.form.controls['aired'].value != '' && this.form.controls['keyword'].value != '') {
+      this.searchByAiredAndKeyword(this.form.controls['aired'].value, this.form.controls['keyword'].value);
+    }
+    else if (this.form.controls['aired'].value != '' && this.form.controls['genre'].value != '') {
+      this.searchByAiredAndGenre(this.form.controls['aired'].value, this.form.controls['genre'].value);
+    }
+    else if (this.form.controls['aired'].value != '' && this.form.controls['genre'].value != '' && this.form.controls['keyword'].value != '') {
+      this.searchByAiredAndGenreAndKeyword(this.form.controls['aired'].value, this.form.controls['genre'].value, this.form.controls['keyword'].value);
+    }
+
     else if (this.form.controls['keyword'].value != '') {
       this.search(this.form.controls['keyword'].value);
     }
     else if (this.form.controls['genre'].value != '') {
       this.searchByGenre(this.form.controls['genre'].value);
     }
+
+    else if (this.form.controls['aired'].value != '') {
+      this.searchByAired(this.form.controls['aired'].value);
+    }
     else if (this.form.invalid) {
       this.search('*');
     }
 
+  }
+
+  resetAdvancedSearch() {
+    this.form.controls['keyword'].setValue('');
+    this.form.controls['genre'].setValue('');
+    this.form.controls['aired'].setValue('');
   }
 
   // onPageChange(event: any) {
@@ -129,6 +168,49 @@ export class IndexComponent {
 
   }
 
+  searchByAiredAndKeyword(aired: string, keyword: string) {
+    console.log(aired);
+    this.book = [];
+    this.getDataByAiredAndKeyword(aired, keyword).subscribe((response: RootResponse) => {
+      this.book = response.response.docs;
+      this.numfound= response.response.numFound;
+    });
+
+  }
+
+  searchByAiredAndGenre(aired: string, genre: string) {
+    console.log(aired);
+    this.book = [];
+    this.getDataByAiredAndGenre(aired, genre).subscribe((response: RootResponse) => {
+      this.book = response.response.docs;
+      this.numfound= response.response.numFound;
+    });
+
+  }
+
+  searchByAiredAndGenreAndKeyword(aired: string, genre: string, keyword: string) {
+    console.log(aired);
+    this.book = [];
+    this.getDataByAiredAndGenreAndKeyword(aired, genre, keyword).subscribe((response: RootResponse) => {
+      this.book = response.response.docs;
+      this.numfound= response.response.numFound;
+    });
+
+  }
+
+  searchByAired(aired: string) {
+    console.log(aired);
+    this.book = [];
+    this.getDataByAired(aired).subscribe((response: RootResponse) => {
+      this.book = response.response.docs;
+      this.numfound= response.response.numFound;
+    });
+
+  }
+
+
+
+
 
   UniqueGenre(genre: string) {
     if (this.mainGenre.indexOf(genre) === -1) {
@@ -180,6 +262,10 @@ export class IndexComponent {
 
   
 
+  
+
+  
+
   getData(keyword: string) {
     let baseUrl = `http://localhost:8080/getsolr/` + keyword;
     //console.log(environment.apiurl);
@@ -204,6 +290,41 @@ export class IndexComponent {
     //console.log(environment.apiurl);
     return this.http.get<RootResponse>(baseUrl, this.httpOptions);
   }
+
+  getDataByAiredAndKeyword(aired: string, keyword: string) {
+    let baseUrl = `http://localhost:8080/getsolrbyairedandkeyword/` + aired + '/' + keyword;
+    //console.log(environment.apiurl);
+    return this.http.get<RootResponse>(baseUrl, this.httpOptions);
+  }
+
+  getDataByAiredAndGenre(aired: string, genre: string) {
+    let baseUrl = `http://localhost:8080/getsolrbyairedandgenre/` + aired + '/' + genre;
+    //console.log(environment.apiurl);
+    return this.http.get<RootResponse>(baseUrl, this.httpOptions);
+  }
+
+  getDataByAiredAndGenreAndKeyword(aired: string, genre: string, keyword: string) {
+    let baseUrl = `http://localhost:8080/getsolrbyairedandgenreandkeyword/` + aired + '/' + genre + '/' + keyword;
+    //console.log(environment.apiurl);
+    return this.http.get<RootResponse>(baseUrl, this.httpOptions);
+  }
+
+  getDataByAired(aired: string) {
+    let baseUrl = `http://localhost:8080/getsolrbyaired/` + aired;
+    //console.log(environment.apiurl);
+    return this.http.get<RootResponse>(baseUrl, this.httpOptions);
+  }
+
+  getFacetAired() {
+    let baseUrl = `http://localhost:8080/getfacetaired`;
+    //console.log(environment.apiurl);
+    return this.http.get<RootResponse>(baseUrl, this.httpOptions);
+  }
+
+
+
+
+  
 
   
 

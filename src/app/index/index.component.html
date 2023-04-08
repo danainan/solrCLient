@@ -1,244 +1,231 @@
-
-<div class="container-fluid">
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-2">
-      <a class="navbar-brand" [routerLink]="['']">Anime-Suzu</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <!-- <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Categories</a>
-              </li>
-            </ul> -->
-        <!-- <form class="d-flex" [formGroup]="form" (ngSubmit)="submit()">
-          <input formControlName="keyword" class="form-control me-2" type="search" placeholder="Search"
-            aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
-      </div>
-  </nav>
-  <div class="col">
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <div class="col-8">
-        <div class="row-5 mb-md-0">
-          <input formControlName="keyword" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        </div>
+<div class="container-fluid pt-2" style="background-color: #1A2028;">
+  <div class="my-nav">
+    <div class="row">
+      <div class="col-2" >
+      
     
-        <div class="text-advancedsearch">Advanced Search</div>
-        <div class="row me-auto">
-          <div class="col-3">
-            <div class="input-field">
-              <div class="input-select">
-                <select formControlName="genre">
-                  <option value="" placeholder="">Genre</option>
-                  <option value="Comedy">Comedy</option>
-                  <option value="Drama">Drama</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="input-field">
-              <div class="input-select">
-                <select formControlName="year">
-                  <option placeholder="" value="">Years</option>
-                  <option>2014</option>
-                  <option>2018</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-2">
-            <div class="input-field">
-              <div class="input-select">
-              
-                <!-- <input type="range" class="form-range" id="customRange1" min="0" max="10" step="1"> -->
-
-
-              </div>
-            </div>
-          </div>
-          <div class="col-4 d-flex">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </div>
-        </div>
+        <a href="">
+          <img src="https://user-images.githubusercontent.com/71175110/230731690-27061f91-51ac-4817-ab9a-924998408f7b.gif" alt="logo" class="logo"  />
+          <!-- <h4 style="color:white;">Anime-suzu</h4> -->
+        </a>  
       </div>
-    
-      <!-- <div class="col">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-      </div> -->
-    </form>
+      <div class="col-10">
+      
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div>
+          <div class="row pt-5">
+            <div class="col-8">
+              <input
+                formControlName="keyword"
+                class="form-control me-2"
+                type="search"
+                placeholder="Search for keyword"
+                aria-label="Search"
+              />
+            </div>
+            <div class="col-2">
+              <button class="button-59" type="submit">
+                Search
+              </button>
+            </div>  
+          </div>
+        
+          <div class="row">
+            <div class="text-advancedsearch">Advanced Search</div>
+        
+              <div class="row">
+                <div class="col-3">
+                  <div class="input-field">
+                    <div class="input-select">
+                      <select formControlName="genre">
+                        <option value="" placeholder="">Genre</option>
+                        <option value="Comedy">Comedy</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Action">Action</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Sci-Fi">Sci-Fi</option>
+                        <option value="Sports">Sports</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-field">
+                    <div class="input-select">
+                      <!-- <select formControlName="aired">
+                        <option placeholder="" value="">Aired</option>
+                        <option value="2014">2014</option>
+                        <option value="2018">2018</option>
+                      </select> -->
+                      <!-- <input formControlName="aired" type="number" placeholder="Aired"> -->
+                      <select formControlName="aired" >
+                        <option *ngFor = "let item of Aired" value="{{item}}">{{item}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="input-field">
+                    <button class="button-59"(click)="resetAdvancedSearch()">Reset</button>
+                  </div>
+                </div>
+              </div>
+        
+          </div>
+          
+        </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-weight: 300px; font-size: 20px;color: aliceblue;padding-top: 10px;"> ผลการค้นหา : {{numfound}}</p>
+  
+  <div class="col pt-2">
     <div class="col">
       <div class="row">
-          <a *ngIf="numfound">
-            <a *ngFor="let buttonIndex of getButtonIndexes()" style="padding-left: 10px;">
-                <button class="btn btn-outline-primary" (click)="page = buttonIndex+1">{{buttonIndex+1}}</button>
-            </a>
+        <a *ngIf="numfound">
+          <a
+            *ngFor="let buttonIndex of getButtonIndexes()"
+            style="padding-left: 10px"
+          >
+            <button
+              class="btn btn-outline-primary"
+              (click)="page = buttonIndex + 1"
+            >
+              {{ buttonIndex + 1 }}
+            </button>
           </a>
-      </div>
-    </div>
-    
-    
-    
-    
- 
-    
- 
-    
-    
-<div class="col">
-<div class="col-3">
-  
-  <div class="row-8">
-    <h4>found: {{numfound|number}}</h4>
-    
-    <div class="animes-grid col-3">
-      <div *ngFor="let item of page >= 1 ? book.slice((page-1)*50, page*50) : book.slice(0, 50)">
-        
-        <div class="anime-card">
-          <!-- <a href="http://localhost:4200/detail" id={{item.id}} (click)="searchById(item.id)"> -->
-          <a [routerLink]="['/detail', item.id]" id={{item.id}} (click)="searchById(item.id)">
-            <div class="card-head">
-              <img src={{item.img_url}} alt="Anime Image">
-            </div>
-            <div class="card-body">
-              <h4 class="card-title" style="color:#162032 ; font-weight:bold; font-size:16px;">{{item.title}}</h4>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    
-  
-  </div>
-
-  <div class="row-4">
-    <h4>Genre</h4>
-    <!--  list-group-numbered -->
-    <ol class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <button class="btn btn-outline-primary"><a href="http://localhost:4200" style="text-decoration: none;">ALL</a></button>
-        </div>
-      </li>
-      <!-- <li *ngFor="let item of facetGenre|slice:0:10" -->
-      <li *ngFor="let item of pageGenre >= 1 ? facetGenre.slice((pageGenre-1)*10, pageGenre*10) : facetGenre.slice(0, 10)"
-        class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <button class="btn btn-outline-primary" (click)="searchByGenre(item.data)">{{item.data}}</button>
-        </div>
-        <span class="badge bg-primary rounded-pill" style="background-color: #162032;">{{item.count}}</span>
-        
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <button class="btn btn-outline-success" (click)="pageGenre = pageGenre-1">Previous</button>
-        </div>
-        <div class="ms-2 me-auto">
-          <button class="btn btn-outline-success" (click)="pageGenre = pageGenre+1">Next</button>
-        </div>
-    </ol>
-  </div>
-  
-  
-</div>
-
-</div>
-
-
-<div class="col">
-  <div class="row">
-      <a *ngIf="numfound">
-        <a *ngFor="let buttonIndex of getButtonIndexes()" style="padding-left: 10px;">
-            <button class="btn btn-outline-primary" (click)="page = buttonIndex+1">{{buttonIndex+1}}</button>
         </a>
-      </a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-8 container-grid">
+        <div class="card" *ngFor="let item of page >= 1 ? book.slice((page-1)*50, page*50) : book.slice(0, 50)">
+          <span class="badge badge-danger" style="z-index: 1; position: absolute; top: 3%; right: 5%;">
+            {{item.episodes}} episodes
+          </span>
+          <span class="badge badge-warning" style="z-index: 1; position: absolute; top: 3%; left: 5%;">
+            {{item.score}} 
+          </span>
+          <img src={{item.img_url}} [routerLink]="['/detail', item.id]" id={{item.id}} (click)="searchById(item.id)">
+          <div class="info" [routerLink]="['/detail', item.id]" id={{item.id}} (click)="searchById(item.id)">
+            <p>{{item.title}}</p>
+          </div>
+          
+        </div>
+        
+      </div>
+        
+
+
+    
+      <div class="col-4-genre">
+        <h4 style="color:#000">Genre</h4>
+        <!--  list-group-numbered -->
+        <ol class="list-group">
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              
+                <a href="http://localhost:4200" style="text-decoration: none;color:#000">ALL</a
+                >
+              
+            </div>
+          </li>
+          <!-- <li *ngFor="let item of facetGenre|slice:0:10" -->
+          <li
+            *ngFor="
+              let item of pageGenre >= 1
+                ? facetGenre.slice((pageGenre - 1) * 10, pageGenre * 10)
+                : facetGenre.slice(0, 10)
+            "
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <div class="ms-2 me-auto">
+              <a
+                class=""
+                (click)="searchByGenre(item.data)"
+              >
+                {{ item.data }}
+              </a>
+            </div>
+            <span
+              class="badge bg-primary rounded-pill"
+              style="background-color: #162032"
+              >{{ item.count }}</span
+            >
+          </li>
+      
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="me-auto container">
+              <button
+                class="button-70"
+                (click)="pageGenre = pageGenre - 1"
+              >
+                Previous
+              </button>
+            </div>
+            <div class="me-auto container">
+              <button
+                class="button-70"
+                (click)="pageGenre = pageGenre + 1"
+              >
+                Next
+              </button>
+            </div>
+          </li>
+        </ol>
+        <div class="row pt-5">
+          <div class="card w-100">
+            <div class="card-img">
+              <div class="info" style="color:white;text-align: center;justify-content: center;">สนใจติดต่อ โฆษณา 555-5555-5555</div>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-2">
+          <div class="card w-100">
+            <div class="card-img">
+              <div class="info" style="color:white;text-align: center;justify-content: center;">สนใจติดต่อ โฆษณา 555-5555-5555</div>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-2">
+          <div class="card w-100">
+            <div class="card-img">
+              <div class="info" style="color:white;text-align: center;justify-content: center;">สนใจติดต่อ โฆษณา 555-5555-5555</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="row">
+        <a *ngIf="numfound">
+          <a
+            *ngFor="let buttonIndex of getButtonIndexes()"
+            style="padding-left: 10px"
+          >
+            <button
+              class="btn btn-outline-primary"
+              (click)="page = buttonIndex + 1"
+            >
+              {{ buttonIndex + 1 }}
+            </button>
+          </a>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-
   
-
-
-
-
-<style>
-  .animes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
-  }
-
-  .anime-card {
-    --scale: 0.8;
-    cursor: pointer;
-  }
-
-  .anime-card .card-head {
-    position: relative;
-    height: 250px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    overflow: hidden;
-  }
-
-  .anime-card:hover .card-img {
-    transform: scale(1.1);
-  }
-
-  .anime-card .card-overlay {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    backdrop-filter: blur(5px);
-  }
-
-  .movie-card:hover .card-overlay {
-    opacity: 1;
-  }
-
-  .live-card .card-body {
-    display:         flex;
-    justify-content: flex-start;
-    align-items:     flex-start;
-  }
-
-  .input-field {
-    position: relative;
-    margin: 10px 0;
-  }
-
-  .input-select {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 40px;
-  }
-
-  .input-select select {
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 0 10px;
-    border: 0.1px solid #d8d7d7;
-    border-radius: 5px;
-    /* background: #d8d7d7; */
-    font-size: 16px;
-    color: #000;
-    /* appearance: none;
-    outline: none; */
-  }
-
-  .text-advancedsearch {
-    font-size: 12px;
-    color: #162032;
-    text-decoration: underline;
-    padding-left: 10px;
-  }
-
-</style>
+</div>
 
 
 

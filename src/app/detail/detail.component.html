@@ -1,16 +1,20 @@
 
-
+<body style="background-color: #1A2128;">
 <div class="pt-2 mx-5">
   <nav aria-label="breadcrumb">
     <div class="breadcrumb" [ngClass]="'custom-breadcrumb'">
-      <a class="breadcrumb-item" [routerLink]="['/index']"><span>Home</span></a>
-      <p class="breadcrumb-item active" aria-current="page">{{title}}</p>
+      <a class="breadcrumb-item" [routerLink]="['/index']" style="font-weight: bolder;font-size: 20px;"><span>Home</span></a>
+      <a class="breadcrumb-item active" aria-current="page" style="color:white;font-size: 20px;">{{title}}</a>
     </div>
   </nav>
+  
 </div>
 
-<div class="container pd-1">
+<!-- <div class="container pd-1">
   <h1>{{title}}</h1>
+  <p>{{synopsis}}</p>
+  <p>{{genre}}</p>
+  <p>{{aired}}</p>
 </div>
 
 <style>
@@ -21,4 +25,34 @@
     border-radius: 0.75rem; 
   }
 
-</style>
+</style> -->
+
+
+	<main>
+		<div class="anime-image">
+			<img src={{img_url}} alt="Anime Image">
+		</div>
+		<div class="anime-details">
+			<h2 class="anime-title">{{title}}</h2>
+			<p class="anime-synopsis">{{synopsis}}</p>
+			<div class="anime-info">
+				<p class="anime-genre" style="color:white; font-weight: bolder; font-size: 20px;" >Genre: 
+          
+          <!-- <a href="#">{{genre}}</a> -->
+          <a *ngFor=" let genre of genre.split(',')" (click)="searchByGenre(genre)">{{genre}}
+
+          </a>
+        
+        
+        </p>
+				<p class="anime-release-year" style="color:white; font-weight: bolder; font-size: 20px;">Aired: <a>{{aired}}</a></p>
+				<p class="anime-episodes" style="color:white; font-weight: bolder; font-size: 20px;" >Episodes: <a>{{episodes}}</a></p>
+				<p class="anime-score" style="color:white; font-weight: bolder; font-size: 20px;">Score: <a >{{score}}</a></p>
+			</div>
+		</div>
+	</main>
+
+<footer>
+  <div style="color:white; font-weight: bolder; font-size: 20px;">Reference : <a href={{link}}> {{link}}</a></div>
+</footer>
+</body>

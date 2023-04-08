@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { __param } from 'tslib';
 import { ActivatedRoute} from '@angular/router';
+import { IndexComponent } from '../index/index.component';
 
 @Component({
   selector: 'app-detail',
@@ -11,7 +12,7 @@ import { ActivatedRoute} from '@angular/router';
 })
 
 
-export class DetailComponent {
+export class DetailComponent{
   
   
   httpOptions = {
@@ -32,6 +33,8 @@ export class DetailComponent {
   episodes : any;
   score : any;
   img_url : any;
+  link: any;
+  index = new IndexComponent(this.http);
   constructor(private http: HttpClient ,private route: ActivatedRoute) {}
   
 
@@ -54,6 +57,7 @@ export class DetailComponent {
         this.episodes = element.episodes;
         this.score = element.score;
         this.img_url = element.img_url;
+        this.link = element.link;
       }
       );
     })
@@ -66,6 +70,16 @@ export class DetailComponent {
     //console.log(environment.apiurl);
     return this.http.get<any>(baseUrl, this.httpOptions);
   }
+
+  searchByGenre(genre: string) {
+    this.index.searchByGenre(genre);
+    
+
+  }
+
+
+
+
 
   
 
