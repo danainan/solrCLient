@@ -1,3 +1,4 @@
+
 <div class="container-fluid pt-2" style="background-color: #1A2028;">
   <div class="my-nav">
     <div class="row">
@@ -13,15 +14,25 @@
       
         <form [formGroup]="form" (ngSubmit)="submit()">
           <div>
+            
           <div class="row pt-5">
+            <!-- <div class="col-2">
+                <div class="input-select">
+                  <select formControlName="selectsearchby" ">
+                    <option value="keyword" id="keyword">Keyword</option>
+                    <option value="title" id="title">Title</option>
+                  </select>
+                </div>
+            </div> -->
             <div class="col-8">
               <input
-                formControlName="keyword"
+                formControlName = 'keyword'
                 class="form-control me-2"
                 type="search"
-                placeholder="Search for keyword"
+                placeholder="Search by keyword All"
                 aria-label="Search"
               />
+              
             </div>
             <div class="col-2">
               <button class="button-59" type="submit">
@@ -47,6 +58,8 @@
                         <option value="Romance">Romance</option>
                         <option value="Sci-Fi">Sci-Fi</option>
                         <option value="Sports">Sports</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
                   </div>
@@ -61,6 +74,7 @@
                       </select> -->
                       <!-- <input formControlName="aired" type="number" placeholder="Aired"> -->
                       <select formControlName="aired" >
+                        <option value="" placeholder="">Aired</option>
                         <option *ngFor = "let item of Aired" value="{{item}}">{{item}}</option>
                       </select>
                     </div>
@@ -68,7 +82,7 @@
                 </div>
                 <div class="col-2">
                   <div class="input-field">
-                    <button class="button-59"(click)="resetAdvancedSearch()">Reset</button>
+                    <button class="button-60"(click)="resetAdvancedSearch()">Reset</button>
                   </div>
                 </div>
               </div>
@@ -80,7 +94,6 @@
       </div>
     </div>
   </div>
-
   <p style="font-weight: 300px; font-size: 20px;color: aliceblue;padding-top: 10px;"> ผลการค้นหา : {{numfound}}</p>
   
   <div class="col pt-2">
@@ -132,7 +145,7 @@
           >
             <div class="ms-2 me-auto">
               
-                <a href="http://localhost:4200" style="text-decoration: none;color:#000">ALL</a
+                <a href="" style="text-decoration: none;color:#000">ALL</a
                 >
               
             </div>

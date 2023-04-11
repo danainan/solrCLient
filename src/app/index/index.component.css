@@ -113,7 +113,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 9px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     align-items: center;
     justify-content: space-between;
   }
@@ -159,10 +159,10 @@
     background-color: #e0a018;
   }
 
-  .button-59 {
+  .button-60 {
     align-items: center;
     background-color: #fff;
-    border: 2px solid #000;
+    border: 0.5px solid #000;
     box-sizing: border-box;
     color: #000;
     cursor: pointer;
@@ -170,7 +170,7 @@
     fill: #000;
     font-family: Inter,sans-serif;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
     height: 38px;
     justify-content: center;
     letter-spacing: -.8px;
@@ -186,11 +186,11 @@
     touch-action: manipulation;
 }
 
-.button-59:focus {
+.button-60:focus {
   color: #171e29;
 }
 
-.button-59:hover {
+.button-60:hover {
   border-color: #06f;
   color: #06f;
   
@@ -198,16 +198,64 @@
 
 }
 
-.button-59:active {
+.button-60:active {
   border-color: #06f;
   color: #06f;
   fill: #06f;
 }
 
 @media (min-width: 768px) {
+  .button-60 {
+    min-width: 100px;
+  }
   .button-59 {
     min-width: 170px;
   }
+}
+
+.button-59 {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #00aaff;
+  box-sizing: border-box;
+  color: #00aaff;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #00aaff;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .1s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-59:focus {
+color: #171e29;
+}
+
+.button-59:hover {
+border-color: rgb(255, 0, 200);
+color: rgb(255, 0, 200);
+
+fill: rgb(255, 0, 200);
+
+}
+
+.button-59:active {
+border-color: rgb(255, 0, 200);
+color: rgb(255, 0, 200);
+fill: rgb(255, 0, 200);
 }
 
 .button-70 {

@@ -208,13 +208,16 @@ main {
 	font-size: 36px;
 	margin-bottom: 20px;
 	color: #ffffff;
+	
 }
 
 .anime-synopsis {
-	font-size: 20px;
+	font-size: 17px;
 	line-height: 1.5;
 	margin-bottom: 20px;
 	color: #ffffff;
+	/* border: 1px solid saddlebrown; */
+	width: 95%;
 }
 
 .anime-info {
